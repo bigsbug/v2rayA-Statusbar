@@ -3,18 +3,22 @@ import subprocess
 import shutil
 import os
 
+
+HOME_PATH = os.path.expanduser("~")
+
 def get_env():
     env = {
         'PATH':
-                "/opt/homebrew/bin:"
-                "/opt/homebrew/sbin:"
-                "/usr/local/bin:"
-                "/opt/local/bin:"
-                "/usr/bin:"
-                "/bin:"
-                "/usr/sbin:"
-                "/sbin:",
-        'HOME': '/Users/alisadeghifar', 
+                '/opt/homebrew/bin:'
+                '/opt/homebrew/sbin:'
+                '/usr/local/bin:'
+                '/opt/local/bin:'
+                '/usr/bin:'
+                '/bin:'
+                '/usr/sbin:'
+                '/sbin:',
+        'HOME': HOME_PATH, 
+
     }   
 
     return env
@@ -40,7 +44,7 @@ def is_running():
 @rumps.clicked("Start Proxy")
 def toggle_proxy(sender):
     global v2ray_process
-    print(get_env())
+
 
     if not V2RAY_PATH or not os.path.exists(V2RAY_PATH):
         rumps.alert("Error", f"V2RayA binary not found. Please install V2RayA and ensure it's in your PATH. {V2RAY_PATH}")
