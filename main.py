@@ -3,29 +3,29 @@ import subprocess
 import shutil
 import os
 
+def get_env():
+    env = {
+        'PATH':
+                "/opt/homebrew/bin:"
+                "/opt/homebrew/sbin:"
+                "/usr/local/bin:"
+                "/opt/local/bin:"
+                "/usr/bin:"
+                "/bin:"
+                "/usr/sbin:"
+                "/sbin:",
+        'HOME': '/Users/alisadeghifar', 
+    }   
+
+    return env
+
 def find_v2raya():
-    # Default to checking system PATH
     path = shutil.which("v2raya")
     if path:
         return path
 
-    # Try common Homebrew locations manually
-    common_paths = [
-        "/opt/homebrew/bin/v2raya",        # Apple Silicon
-        "/usr/local/bin/v2raya",           # Intel Macs
-        "/opt/local/bin/v2raya",           # MacPorts (if used)
-    ]
-
-    for p in common_paths:
-        if os.path.isfile(p) and os.access(p, os.X_OK):
-            return p
-
     return None
 
-
-def get_env():
-    env = os.environ.copy()
-    return env
 
 V2RAY_PATH = find_v2raya()
 v2ray_process = None  # Global reference to the subprocess
@@ -40,6 +40,7 @@ def is_running():
 @rumps.clicked("Start Proxy")
 def toggle_proxy(sender):
     global v2ray_process
+    print(get_env())
 
     if not V2RAY_PATH or not os.path.exists(V2RAY_PATH):
         rumps.alert("Error", f"V2RayA binary not found. Please install V2RayA and ensure it's in your PATH. {V2RAY_PATH}")
