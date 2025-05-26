@@ -7,7 +7,12 @@ OPTIONS = {
     "packages": ["rumps"],
     "plist": {
         "LSUIElement": True,
+        'CFBundleName': 'V2rayA',
+        'CFBundleDisplayName': 'V2rayA',
+        'CFBundleIdentifier': 'bigsbug.v2raya',
+        'CFBundleVersion': '1.0.0',
     },
+
 }
 
 setup(
