@@ -22,6 +22,11 @@ def find_v2raya():
 
     return None
 
+
+def get_env():
+    env = os.environ.copy()
+    return env
+
 V2RAY_PATH = find_v2raya()
 v2ray_process = None  # Global reference to the subprocess
 
@@ -39,8 +44,6 @@ def toggle_proxy(sender):
     if not V2RAY_PATH or not os.path.exists(V2RAY_PATH):
         rumps.alert("Error", f"V2RayA binary not found. Please install V2RayA and ensure it's in your PATH. {V2RAY_PATH}")
 
-
-
     if is_running():
         # Stop the proxy
         v2ray_process.terminate()
@@ -50,7 +53,7 @@ def toggle_proxy(sender):
     else:
         try:
             # Start the proxy
-            v2ray_process = subprocess.Popen([V2RAY_PATH, "--lite"])
+            v2ray_process = subprocess.Popen([V2RAY_PATH, "--lite"],env=get_env())
             sender.title = "Stop Proxy"
             # rumps.notification("V2Ray", "", "Proxy started.")
         except Exception as e:
