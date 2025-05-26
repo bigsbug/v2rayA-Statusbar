@@ -19,3 +19,24 @@ A simple macOS menu bar application that allows you to start and stop the V2RayA
 - **Python 3.7** (Recommended for best compatibility with `py2app`)
 - [V2RayA](http://v2raya.org/) must be installed and available in your `$PATH`
 
+## How To Use
+
+- Install required libraries:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+- Build the macOS application:
+
+    ```bash
+    python setup.py py2app
+    ```
+
+- After building, you'll find your app inside the `dist` folder as:
+
+    ```
+    dist/V2rayA.app
+    ```
+
+- You can move this `.app` to your `/Applications` folder and launch it like any native macOS application.
